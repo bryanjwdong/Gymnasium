@@ -270,10 +270,12 @@ class FrozenLakeEnv(Env):
                         li.append((1.0, s, 0, True))
                     else:
                         if is_slippery:
-                            for b in [(a - 1) % 4, a, (a + 1) % 4]:
+                            for b, p in zip([(a - 1) % 4, a, (a + 1) % 4], [1/6, 2/3, 1/6]):
+                                li.append((p, *update_probability_matrix(row, col, b)))
+                            '''for b in [(a - 1) % 4, a, (a + 1) % 4]:
                                 li.append(
-                                    (1.0 / 3.0, *update_probability_matrix(row, col, b))
-                                )
+                                    (9.0 / 10.0, *update_probability_matrix(row, col, b))
+                                )'''
                         else:
                             li.append((1.0, *update_probability_matrix(row, col, a)))
 
